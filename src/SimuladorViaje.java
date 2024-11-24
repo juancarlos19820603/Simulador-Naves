@@ -34,7 +34,7 @@ public class SimuladorViaje {
                     break;
                 case 3:
                     // Llama al método para iniciar la simulación del viaje.
-                    iniciarSimulacion(planetas, distancias);
+                   iniciarSimulacion(planetas, distancias);
                     break;
                 case 4:
                     // Mensaje de despedida al salir del programa.
@@ -48,4 +48,31 @@ public class SimuladorViaje {
 
         scanner.close(); // Cierra el objeto Scanner para liberar recursos.
     }
+    public static void seleccionarPlaneta(String[] planetas, double[] distancias) {
+        // Crea un objeto Scanner para leer la entrada del usuario.
+        Scanner scanner = new Scanner(System.in);
+    
+        // Muestra el título de la sección de selección de planetas.
+        System.out.println("=== Selección de Planeta ===");
+    
+        // Itera sobre el array de planetas para mostrar la lista de opciones junto con sus distancias.
+        for (int i = 0; i < planetas.length; i++) {
+            // Imprime el número de opción, el nombre del planeta y su distancia desde la Tierra.
+            System.out.println((i + 1) + ". " + planetas[i] + " - Distancia: " + distancias[i] + " millones de km");
+        }
+    
+        // Solicita al usuario que seleccione un planeta ingresando el número correspondiente.
+        System.out.print("Selecciona un planeta (1-" + planetas.length + "): ");
+        int seleccion = scanner.nextInt(); // Lee la opción ingresada por el usuario.
+    
+        // Valida si la selección está dentro del rango válido (1 a la longitud del array de planetas).
+        if (seleccion > 0 && seleccion <= planetas.length) {
+            // Muestra el nombre del planeta seleccionado.
+            System.out.println("Has seleccionado " + planetas[seleccion - 1] + ".");
+        } else {
+            // Muestra un mensaje de error si la selección no es válida.
+            System.out.println("Selección inválida.");
+        }
+    }
+    
 }
