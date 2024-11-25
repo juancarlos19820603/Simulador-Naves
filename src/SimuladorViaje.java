@@ -1,8 +1,9 @@
-import java.util.Scanner; // Importa la clase Scanner para leer datos del usuario desde el teclado.
+import java.util.Scanner; // Importa la clase Scanner para leer datos del usuario desde el teclado. 
 
 public class SimuladorViaje { // Define la clase principal del programa.
     private static int planetaSeleccionado = -1; // Variable para almacenar el índice del planeta seleccionado (-1 significa "no seleccionado").
     private static int naveSeleccionada = -1;   // Variable para almacenar el índice de la nave seleccionada (-1 significa "no seleccionada").
+    private static boolean simulacionIniciada = false; // Variable para verificar si la simulación ha sido iniciada.
 
     public static void main(String[] args) { // Método principal donde comienza la ejecución del programa.
         Scanner scanner = new Scanner(System.in); // Crea un objeto Scanner para leer la entrada del usuario.
@@ -21,7 +22,7 @@ public class SimuladorViaje { // Define la clase principal del programa.
             if (naveSeleccionada == -1) { // Muestra la opción de seleccionar una nave solo si no se ha seleccionado.
                 System.out.println("2. Seleccionar una nave espacial");
             }
-            if (planetaSeleccionado != -1 && naveSeleccionada != -1) { // Muestra la opción de iniciar el viaje si ambos están seleccionados.
+            if (planetaSeleccionado != -1 && naveSeleccionada != -1 && !simulacionIniciada) { // Muestra la opción de iniciar el viaje si ambos están seleccionados y la simulación no ha comenzado.
                 System.out.println("3. Iniciar simulación del viaje");
             }
             System.out.println("4. Salir"); // Siempre muestra la opción de salir.
@@ -45,8 +46,11 @@ public class SimuladorViaje { // Define la clase principal del programa.
                     }
                     break;
                 case 3:
-                    if (planetaSeleccionado != -1 && naveSeleccionada != -1) { // Verifica si se seleccionaron ambos, planeta y nave.
+                    if (planetaSeleccionado != -1 && naveSeleccionada != -1 && !simulacionIniciada) { // Verifica si se seleccionaron ambos, planeta y nave, y si la simulación no ha comenzado.
                         iniciarSimulacion(planetas, distancias); // Llama al método para iniciar la simulación del viaje.
+                        simulacionIniciada = true; // Marca la simulación como iniciada.
+                    } else if (simulacionIniciada) {
+                        System.out.println("La simulación ya fue iniciada. Reinicia el programa para otro viaje."); // Informa si la simulación ya fue iniciada.
                     } else {
                         System.out.println("Debes seleccionar un planeta y una nave antes de iniciar la simulación."); // Mensaje si faltan selecciones.
                     }
@@ -95,6 +99,7 @@ public class SimuladorViaje { // Define la clase principal del programa.
             System.out.println("Selección inválida."); // Mensaje de error para selección inválida.
         }
     }
+
     public static void iniciarSimulacion(String[] planetas, double[] distancias) {
         if (planetaSeleccionado == -1) { // Verifica si se seleccionó un planeta.
             System.out.println("No has seleccionado un planeta. Ve a la opción 1."); // Mensaje si no se seleccionó un planeta.
@@ -120,5 +125,4 @@ public class SimuladorViaje { // Define la clase principal del programa.
         }
         System.out.println("¡Has llegado a " + planetas[planetaSeleccionado] + " con éxito!"); // Mensaje de éxito al llegar.
     }
-
 }
