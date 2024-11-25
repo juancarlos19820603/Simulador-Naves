@@ -46,7 +46,7 @@ public class SimuladorViaje { // Define la clase principal del programa.
                     break;
                 case 3:
                     if (planetaSeleccionado != -1 && naveSeleccionada != -1) { // Verifica si se seleccionaron ambos, planeta y nave.
-                        //iniciarSimulacion(planetas, distancias); // Llama al método para iniciar la simulación del viaje.
+                        iniciarSimulacion(planetas, distancias); // Llama al método para iniciar la simulación del viaje.
                     } else {
                         System.out.println("Debes seleccionar un planeta y una nave antes de iniciar la simulación."); // Mensaje si faltan selecciones.
                     }
@@ -95,4 +95,30 @@ public class SimuladorViaje { // Define la clase principal del programa.
             System.out.println("Selección inválida."); // Mensaje de error para selección inválida.
         }
     }
+    public static void iniciarSimulacion(String[] planetas, double[] distancias) {
+        if (planetaSeleccionado == -1) { // Verifica si se seleccionó un planeta.
+            System.out.println("No has seleccionado un planeta. Ve a la opción 1."); // Mensaje si no se seleccionó un planeta.
+            return; // Finaliza el método si no hay planeta seleccionado.
+        }
+        double distancia = distancias[planetaSeleccionado] * 1000000; // Convierte la distancia de millones de km a km.
+        double velocidad = 100000; // Define la velocidad de la nave seleccionada (constante en este caso).
+        double tiempo = distancia / velocidad; // Calcula el tiempo estimado del viaje en horas.
+
+        System.out.println("Iniciando viaje a " + planetas[planetaSeleccionado] + "..."); // Muestra el destino del viaje.
+        System.out.printf("Distancia: %.2f km. Tiempo estimado: %.2f horas.\n", distancia, tiempo); // Imprime detalles del viaje.
+
+        for (int progreso = 0; progreso <= 100; progreso += 10) { // Simula el progreso del viaje.
+            System.out.println("Progreso del viaje: " + progreso + "%"); // Imprime el progreso actual.
+            if (Math.random() < 0.3) { // Genera eventos aleatorios con una probabilidad del 30%.
+                System.out.println("¡Evento aleatorio! Un asteroide se acerca. Resuelve el problema.");
+            }
+            try {
+                Thread.sleep(1000); // Pausa el programa por 1 segundo.
+            } catch (InterruptedException e) { // Maneja interrupciones en el hilo.
+                System.out.println("Error en la simulación.");
+            }
+        }
+        System.out.println("¡Has llegado a " + planetas[planetaSeleccionado] + " con éxito!"); // Mensaje de éxito al llegar.
+    }
+
 }
