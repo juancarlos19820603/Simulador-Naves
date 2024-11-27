@@ -1,5 +1,6 @@
 import java.util.Scanner; // Importa la clase Scanner para leer datos del usuario desde el teclado. 
 import java.util.InputMismatchException; //se utiliza para manejar excepciones relacionadas con entradas no válidas.
+                 //La clase InputMismatchException pertenece al paquete java.util y se utiliza en Java para manejar excepciones que ocurren cuando un programa espera un tipo de entrada pero recibe un tipo diferente.
 
 public class SimuladorViaje { // Define la clase principal del programa.
     private static int planetaSeleccionado = -1; // Variable para almacenar el índice del planeta seleccionado (-1 significa "no seleccionado").
